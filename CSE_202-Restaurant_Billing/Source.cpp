@@ -11,13 +11,14 @@ string query = "stay";
 
 // Print Welcome Message No input
 void welcomeMessage() {
-    cout << "\n\t*** Welcome to Restaurant Booking System ***" << endl;
+    cout << "\n\t*** Welcome to Inventory Management System ***" << endl;
+
+    // Need to fix this not sure how can we change it????
     cout << "\t\tA restaurant billing application" << endl;
     cout << "\n\t\tAuthor: Tasnim Zotder" << endl;
     cout << "\t\tInst: Lovely Professional University" << endl;
     cout << "\n\t\tCopyright: Tasnim Zotder | 2020" << endl;
-    cout << "\n\n"-
-        << "Please enter 'admin' for Adminstration Access or 'desk' for Billing Access" << endl;
+    cout << "\n\n" << endl;
 }
 
 // Message for Admin users
@@ -29,17 +30,15 @@ void headerAdminMessage() {
         << "---Commands---" << endl;
     cout << "1. 'add' - To add new product [Product_Code, Product_Name, Price]" << endl;
     cout << "2. 'update' - To update a product [Product_Code, (Product_Name), (Price)]" << endl;
-    cout << "3. 'show' - To show all products"
-        << "\t";
-    cout << "4. 'delete' - To delete a product [Product_Code]"
-        << "\n";
-    cout << "5. 'search' - To search a product [Product_Code]\t";
-    cout << "6. 'exit' - To exit the window"
-        << "\n"
-        << endl;
+    cout << "3. 'show' - To show all products" << endl;
+    cout << "4. 'delete' - To delete a product [Product_Code]" << endl;
+    cout << "5. 'search' - To search a product [Product_Code]" << endl;
+    cout << "6. 'bill' - To generate bill -- Not working" << endl; // still tring to figure out how to implement
+    cout << "7. 'exit' - To exit the window" << endl;
 }
 
 // Message for Desk users
+/*
 void headerBillMessage() {
     cout << "\t\t\t"
         << "*** Restaurant Booking System - Bill Desk ***\n"
@@ -56,11 +55,18 @@ void headerBillMessage() {
     cout << "6. 'exit' - To exit the window"
         << "\n"
         << endl;
-}
+}*/
 
 // Commands for Admins
 void runAdminCommands(string query) {
     headerAdminMessage();
+
+    cout << "\n\n"
+        << "Enter the query:"
+        << " ";
+    cin >> query;
+    system("CLS");
+
 
     if (query != "exit") {
         if (query == "admin") {
@@ -115,15 +121,14 @@ void runAdminCommands(string query) {
 
             Admin.searchOne(productCode);
         }
+        else if (query == "bill") {
+            Bill.generateBill();
+        }
         else {
             cout << "\t"
                 << "Please enter a valid command!" << endl;
         }
 
-        cout << "\n\n"
-            << "Enter the query:"
-            << " ";
-        cin >> query;
         system("CLS");
         runAdminCommands(query);
     }
@@ -135,6 +140,7 @@ void runAdminCommands(string query) {
 }
 
 // Commands for Desk
+/*
 void runBillCommands(string query) {
     headerBillMessage();
 
@@ -192,17 +198,8 @@ void runBillCommands(string query) {
             << endl;
     }
 }
-
+*/
 int main() {
     welcomeMessage();
-
-    cin >> query;
-    system("CLS");
-
-    if (query == "admin") {
-        runAdminCommands(query);
-    }
-    else if (query == "desk") {
-        runBillCommands(query);
-    }
+    runAdminCommands(query);
 }
