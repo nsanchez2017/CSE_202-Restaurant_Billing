@@ -50,9 +50,12 @@ void InvAdmin::updateProduct(string productCode, string product, float price) {
     priceList[index] = price;
 }
 
+//
 // Functions under here are the once moved from BillDesk.cpp
+//
+
 // initilize bill desk
-InvAdmin InvAdmin::Bill()
+void InvAdmin::Bill()
 {
     billAmount = 0;
     billProdCount = 0;

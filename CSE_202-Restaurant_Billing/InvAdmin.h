@@ -9,7 +9,7 @@ private:
     int billProdCount;
 
 public:
-    InvAdmin Bill();
+    void Bill();
 
     int findBillIndex(string);
     void billAddProduct(string);
