@@ -1,29 +1,27 @@
 #include <iostream>
-#include <limits>
 
 #include "BillDesk.h"
 #include "InvAdmin.h"
 using namespace std;
 
 InvAdmin Admin;
-Inventory Invent;
+InvAdmin Bill;
 
 string query = "stay";
 
 // Print Welcome Message No input
 void welcomeMessage() {
-    cout << "\n\t*** Welcome to Inventory Management System ***" << endl;
-
-    // Need to fix this not sure how can we change it????
+    cout << "\n\t*** Welcome to Restaurant Booking System ***" << endl;
     cout << "\t\tA restaurant billing application" << endl;
     cout << "\n\t\tAuthor: Tasnim Zotder" << endl;
     cout << "\t\tInst: Lovely Professional University" << endl;
     cout << "\n\t\tCopyright: Tasnim Zotder | 2020" << endl;
-    cout << "\n\n" << endl;
+    cout << "\n\n"
+        << "Please enter 'admin' for Adminstration Access or 'desk' for Billing Access" << endl;
 }
 
-// Admin Commands
-void headerAdminCommands() {
+// Message for Admin users
+void headerAdminMessage() {
     cout << "\t\t\t"
         << "*** Restaurant Booking System - Admin ***\n"
         << endl;
@@ -31,31 +29,47 @@ void headerAdminCommands() {
         << "---Commands---" << endl;
     cout << "1. 'add' - To add new product [Product_Code, Product_Name, Price]" << endl;
     cout << "2. 'update' - To update a product [Product_Code, (Product_Name), (Price)]" << endl;
-    cout << "3. 'show' - To show all products" << endl;
-    cout << "4. 'delete' - To delete a product [Product_Code]" << endl;
-    cout << "5. 'search' - To search a product [Product_Code]" << endl;
-    cout << "6. 'bill' - To generate bill -- Not working" << endl; // still tring to figure out how to implement
-    cout << "7. 'exit' - To exit the window" << endl;
+    cout << "3. 'show' - To show all products"
+        << "\t";
+    cout << "4. 'delete' - To delete a product [Product_Code]"
+        << "\n";
+    cout << "5. 'search' - To search a product [Product_Code]\t";
+    cout << "6. 'exit' - To exit the window"
+        << "\n"
+        << endl;
+}
+
+// Message for Desk users
+void headerBillMessage() {
+    cout << "\t\t\t"
+        << "*** Restaurant Booking System - Bill Desk ***\n"
+        << endl;
+    cout << "\t\t\t\t"
+        << "---Commands---" << endl;
+    cout << "1. 'add' - To add new product [Product_Code]" << endl;
+    cout << "2. 'bill' - To generate bill" << endl;
+    cout << "3. 'show' - To show all products"
+        << "\t";
+    cout << "4. 'delete' - To delete a product [Product_Code]"
+        << "\n";
+    cout << "5. 'search' - To search a product [Product_Code]\t";
+    cout << "6. 'exit' - To exit the window"
+        << "\n"
+        << endl;
 }
 
 // Commands for Admins
-void runAdminCommands() {
-    headerAdminCommands();
-
-    cout << "\n\n"
-        << "Enter the query:"
-        << " ";
-    cin >> query;
-    system("CLS");
-
+void runAdminCommands(string query) {
+    headerAdminMessage();
 
     if (query != "exit") {
-        if (query == "show") {
-            cout << "\t\t*** Inventory Product List ***\n\n" << endl;
-            Invent.showProducts();
-            cout << "Press enter to continue" << endl;
-            cin.ignore();
-            cin.ignore();
+        if (query == "admin") {
+            cout << "\t\tWelcome to Admin Panel"
+                << "\n"
+                << endl;
+        }
+        else if (query == "show") {
+            Admin.showProducts();
         }
         else if (query == "add") {
             string productCode, product;
@@ -69,10 +83,7 @@ void runAdminCommands() {
             Admin.addProduct(productCode, product, price);
 
             cout << "\tProduct Added" << endl;
-            Invent.searchOne(productCode);
-            cout << "Press enter to continue" << endl;
-            cin.ignore();
-            cin.ignore();
+            Admin.searchOne(productCode);
         }
         else if (query == "delete") {
             string productCode;
@@ -89,12 +100,12 @@ void runAdminCommands() {
             cout << "Please enter the Product_Code ";
             cin >> productCode;
 
-            Invent.searchOne(productCode);
+            Admin.searchOne(productCode);
             cout << "\nPlease enter the Product & Price: ";
             cin >> product >> price;
 
             Admin.updateProduct(productCode, product, price);
-            Invent.searchOne(productCode);
+            Admin.searchOne(productCode);
         }
         else if (query == "search") {
             string productCode;
@@ -102,18 +113,19 @@ void runAdminCommands() {
             cout << "Please enter the Product_Code ";
             cin >> productCode;
 
-            Invent.searchOne(productCode);
-        }
-        else if (query == "bill") {
-            
-            
+            Admin.searchOne(productCode);
         }
         else {
             cout << "\t"
                 << "Please enter a valid command!" << endl;
         }
+
+        cout << "\n\n"
+            << "Enter the query:"
+            << " ";
+        cin >> query;
         system("CLS");
-        runAdminCommands();
+        runAdminCommands(query);
     }
     else {
         system("CLS");
@@ -122,41 +134,26 @@ void runAdminCommands() {
     }
 }
 
-// Billing Commands
-void headerBillCommands() {
-    cout << "\t\t\t"
-        << "*** Restaurant Booking System - Bill Desk ***\n"
-        << endl;
-    cout << "\t\t\t\t"
-        << "---Commands---" << endl;
-    cout << "1. 'add' - To add new product [Product_Code]" << endl;
-    cout << "2. 'bill' - To generate bill" << endl;
-    cout << "4. 'delete' - To delete a product [Product_Code]"
-        << "\n";
-    cout << "5. 'search' - To search a product [Product_Code]\t";
-    cout << "6. 'exit' - To exit the window"
-        << "\n"
-        << endl;
-}
-
-// Commands for generating bill
-void runBillCommands() {
-    headerBillCommands();
-
-    cout << "\n\n"
-        << "Enter the query:"
-        << " ";
-    cin >> query;
-    system("CLS");
+// Commands for Desk
+void runBillCommands(string query) {
+    headerBillMessage();
 
     if (query != "exit") {
-        if (query == "search") {
+        if (query == "desk") {
+            cout << "\t\tWelcome to Bill Desk"
+                << "\n"
+                << endl;
+        }
+        else if (query == "show") {
+            Admin.showProducts();
+        }
+        else if (query == "search") {
             string productCode;
 
             cout << "Please enter the Product_Code ";
             cin >> productCode;
 
-            Invent.searchOne(productCode);
+            Admin.searchOne(productCode);
         }
         else if (query == "add") {
             string productCode;
@@ -164,7 +161,7 @@ void runBillCommands() {
             cout << "Please Enter Product Code: " << endl;
             cin >> productCode;
 
-            Admin.billAddProduct(productCode);
+            Bill.billAddProduct(productCode);
         }
         else if (query == "delete") {
             string productCode;
@@ -172,18 +169,22 @@ void runBillCommands() {
             cout << "Please Enter Product Code: " << endl;
             cin >> productCode;
 
-            Admin.billDeleteProduct(productCode);
+            Bill.billDeleteProduct(productCode);
         }
         else if (query == "bill") {
-            Admin.generateBill();
+            Bill.generateBill();
         }
         else {
             cout << "\t"
                 << "Please enter a valid command!" << endl;
         }
 
+        cout << "\n\n"
+            << "Enter the query:"
+            << " ";
+        cin >> query;
         system("CLS");
-        runBillCommands();
+        runBillCommands(query);
     }
     else {
         system("CLS");
@@ -194,5 +195,14 @@ void runBillCommands() {
 
 int main() {
     welcomeMessage();
-    runAdminCommands();
+
+    cin >> query;
+    system("CLS");
+
+    if (query == "admin") {
+        runAdminCommands(query);
+    }
+    else if (query == "desk") {
+        runBillCommands(query);
+    }
 }
