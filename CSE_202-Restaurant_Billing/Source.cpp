@@ -24,7 +24,7 @@ void headerAdminMessage() {
     cout << "\n\t\t\t"
         << "*** Inventory Management System - Admin ***\n"
         << endl;
-    cout << "\t\t\t\t---Commands---" << endl;
+    cout << "\t\t\t\t---Admin Commands---" << endl;
     cout << "1. 'add' - To add new product [Product_Code, Product_Name, Price]" << endl;
     cout << "2. 'update' - To update a product [Product_Code, (Product_Name), (Price)]" << endl;
     cout << "3. 'show' - To show all products in inventory" << endl;
@@ -39,10 +39,10 @@ void headerBillMessage() {
     cout << "\n\t\t\t"
         << "*** Product Billing System - Admin ***\n"
         << endl;
-    cout << "\t\t\t\t---Commands---" << endl;
+    cout << "\t\t\t\t---Billing Commands---" << endl;
     cout << "1. 'add' - To add existing product [Product_Code] to billing list" << endl;
     cout << "2. 'generate' - To generate bill" << endl;
-    cout << "3. 'show' - To show all products in billing list" << endl;
+    cout << "3. 'show' - To show all products in inventory" << endl;
     cout << "4. 'delete' - To delete a product [Product_Code] from bill" << endl;
     cout << "5. 'search' - To search a product [Product_Code] in inventory" << endl;
     cout << "6. 'exit' - To exit the billing menu" << endl;
@@ -133,15 +133,15 @@ void runAdminCommands(string query) {
         }
         // Billing System
         else if (query == "bill") {
-            headerBillMessage();
-
-            cout << "\n\n"
-                << "Enter the query:"
-                << " ";
-            cin >> query;
-            system("CLS");
-
             while (query != "exit") {
+
+                headerBillMessage();
+                cout << "\n\n"
+                    << "Enter the query:"
+                    << " ";
+                cin >> query;
+                system("CLS");
+
                 if (query == "show") {
                     Admin.showProducts();
                 }
@@ -174,14 +174,8 @@ void runAdminCommands(string query) {
                 }
                 else {
                     cout << "\t"
-                        << "Please enter a valid command!" << endl;
+                        << "Please enter a valid command!\n" << endl;
                 }
-                headerAdminMessage();
-                cout << "\n\n"
-                    << "Enter the query:"
-                    << " ";
-                cin >> query;
-                system("CLS");
             }
             system("CLS");
         }
@@ -189,7 +183,7 @@ void runAdminCommands(string query) {
         else {
             system("CLS");
             cout << "\t"
-                << "Please enter a valid command!" << endl;
+                << "Please enter a valid command!\n" << endl;
             runAdminCommands(query);
         }
         runAdminCommands(query);
