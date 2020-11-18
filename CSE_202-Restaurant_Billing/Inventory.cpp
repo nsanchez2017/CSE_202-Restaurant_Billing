@@ -6,7 +6,7 @@
 * returns: int Index
 */
 int Inventory::findIndex(string productCode) {
-    int index = 0;
+    int index = -1;
 
     for (int i = 0; i < productCount; i++) {
         if (productCodes[i] == productCode) {
@@ -38,14 +38,18 @@ void Inventory::showProducts() {
 void Inventory::searchOne(string productCode) {
     int index = findIndex(productCode);
 
-    cout << "\t\t"
+    if (index == -1) {
+        cout << "Product not in inventory" << endl;
+    } else {
+        cout << "\t\t"
         << "Code\t"
         << "Product\t\t"
         << "Price" << endl;
-    cout << "\t\t"
+        cout << "\t\t"
         << "------|---------------|------" << endl;
 
-    cout << "\t\t" << productCodes[index] << "\t";
-    cout << productList[index] << "\t";
-    cout << priceList[index] << endl;
+        cout << "\t\t" << productCodes[index] << "\t";
+        cout << productList[index] << "\t";
+        cout << priceList[index] << endl;
+    }
 }
