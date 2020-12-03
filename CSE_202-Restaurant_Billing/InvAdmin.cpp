@@ -121,7 +121,7 @@ void InvAdmin::billDeleteProduct(string productCode) {
 * prints bill to console
 */
 void InvAdmin::generateBill() {
-    cout << "\n\t\t\tYour Product Bill" << endl;
+    cout << "\n\n\t\t\tYour Product Bill" << endl;
     cout << "\t\t\t_________________\n\n"
         << endl;
 
@@ -145,4 +145,9 @@ void InvAdmin::generateBill() {
 
     cout << "\n\t\t\t\t\t"
         << "THANKS" << endl;
+
+    cout << "\n\nPress Enter to Continue: ";
+    cin.ignore();
+    cin.ignore();
+    system("CLS");
 }

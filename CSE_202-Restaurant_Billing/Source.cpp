@@ -1,19 +1,43 @@
 #include <iostream>
 #include <stdlib.h>
-
 #include "BillDesk.h"
 #include "InvAdmin.h"
 using namespace std;
 
 InvAdmin Admin;
 InvAdmin Bill;
-
 string query = "stay";
+
+void welcomeMessage();
+void headerAdminMessage();
+void headerBillMessage();
+void runAdminCommands();
+void runBillCommands();
+void adminAdd();
+void adminUpdate();
+void adminShow();
+void adminDelete();
+void adminSearch();
+void billAdd();
+void billDelete();
+void billSearch();
+
+
+int main() {
+    system("title Inventory Management System");
+    system("cls");
+
+    welcomeMessage();
+    cout << "\nPress Enter to Continue: ";
+    cin.ignore();
+    system("CLS");
+    runAdminCommands();
+}
 
 // Print Welcome Message No input
 void welcomeMessage() {
     cout << "\n\t*** Welcome to Inventory Management System ***" << endl;
-    cout << "\t\tA inventory keeping and billing application" << endl;
+    cout << "\tA inventory keeping and billing application" << endl;
     cout << "\n\t\tAuthor: Tasnim Zotder" << endl;
     cout << "\t\tInst: Lovely Professional University" << endl;
     cout << "\n\t\tCopyright: Tasnim Zotder | 2020" << endl;
@@ -49,7 +73,7 @@ void headerBillMessage() {
 }
 
 // Commands for Admins
-void runAdminCommands(string query) {
+void runAdminCommands() {
     headerAdminMessage();
 
     cout << "\n\n"
@@ -60,16 +84,18 @@ void runAdminCommands(string query) {
 
     if (query != "exit") {
         if (query == "show") {
-            cout << "\t Inventory List" << endl;
+            adminShow();
+            /*cout << "\t Inventory List" << endl;
             Admin.showProducts();
 
             cout << "\nPress Enter to Continue: ";
             cin.ignore();
             cin.ignore();
-            system("CLS");
+            system("CLS");*/
         }
         else if (query == "add") {
-            string productCode, product;
+            adminAdd();
+            /*string productCode, product;
             float price = 0;
 
             cout << "Please Enter Product Code, Product & Price: ";
@@ -85,10 +111,11 @@ void runAdminCommands(string query) {
             cout << "\nPress Enter to Continue: ";
             cin.ignore();
             cin.ignore();
-            system("CLS");
+            system("CLS");*/
         }
         else if (query == "delete") {
-            string productCode;
+            adminDelete();
+            /*string productCode;
             cout << "\tPlease enter the Product_Code: ";
             cin >> productCode;
 
@@ -96,10 +123,11 @@ void runAdminCommands(string query) {
             cout << "\nPress Enter to Continue: ";
             cin.ignore();
             cin.ignore();
-            system("CLS");
+            system("CLS");*/
         }
         else if (query == "update") {
-            string productCode;
+            adminUpdate();
+            /*string productCode;
             string product;
             float price;
 
@@ -116,10 +144,11 @@ void runAdminCommands(string query) {
             cout << "\nPress Enter to Continue: ";
             cin.ignore();
             cin.ignore();
-            system("CLS");
+            system("CLS");*/
         }
         else if (query == "search") {
-            string productCode;
+            adminSearch();
+            /*string productCode;
 
             cout << "Please enter the Product_Code ";
             cin >> productCode;
@@ -129,64 +158,20 @@ void runAdminCommands(string query) {
             cout << "\nPress Enter to Continue: ";
             cin.ignore();
             cin.ignore();
-            system("CLS");
+            system("CLS");*/
         }
         // Billing System
         else if (query == "bill") {
-            while (query != "exit") {
-
-                headerBillMessage();
-                cout << "\n\n"
-                    << "Enter the query:"
-                    << " ";
-                cin >> query;
-                system("CLS");
-
-                if (query == "show") {
-                    Admin.showProducts();
-                }
-                else if (query == "search") {
-                    string productCode;
-
-                    cout << "Please enter the Product_Code ";
-                    cin >> productCode;
-
-                    Admin.searchOne(productCode);
-                }
-                else if (query == "add") {
-                    string productCode;
-
-                    cout << "Please Enter Product Code: " << endl;
-                    cin >> productCode;
-
-                    Bill.billAddProduct(productCode);
-                }
-                else if (query == "delete") {
-                    string productCode;
-
-                    cout << "Please Enter Product Code: " << endl;
-                    cin >> productCode;
-
-                    Bill.billDeleteProduct(productCode);
-                }
-                else if (query == "bill") {
-                    Bill.generateBill();
-                }
-                else {
-                    cout << "\t"
-                        << "Please enter a valid command!\n" << endl;
-                }
-            }
-            system("CLS");
+            runBillCommands();
         }
         // Bad query
         else {
             system("CLS");
             cout << "\t"
                 << "Please enter a valid command!\n" << endl;
-            runAdminCommands(query);
+            runAdminCommands();
         }
-        runAdminCommands(query);
+        runAdminCommands();
     }
     else {
         system("CLS");
@@ -195,10 +180,162 @@ void runAdminCommands(string query) {
     }
 }
 
-int main() {
-    welcomeMessage();
+// Commands for billing
+void runBillCommands() {
+    headerBillMessage();
+
+    cout << "\n\n"
+        << "Enter the query:"
+        << " ";
+    cin >> query;
+    system("CLS");
+
+    if (query != "exit") {
+        if (query == "show") {
+            Admin.showProducts();
+        }
+        else if (query == "search") {
+            billSearch();
+            /*string productCode;
+
+            cout << "Please enter the Product_Code ";
+            cin >> productCode;
+
+            Admin.searchOne(productCode);*/
+        }
+        else if (query == "add") {
+            billAdd();
+            /*string productCode;
+
+            cout << "Please Enter Product Code: " << endl;
+            cin >> productCode;
+
+            Bill.billAddProduct(productCode);*/
+        }
+        else if (query == "delete") {
+            billDelete();
+            /*string productCode;
+
+            cout << "Please Enter Product Code: " << endl;
+            cin >> productCode;
+
+            Bill.billDeleteProduct(productCode);*/
+        }
+        else if (query == "generate") {
+            Bill.generateBill();
+        }
+        else {
+            cout << "\t"
+                << "Please enter a valid command!\n" << endl;
+        }
+        runBillCommands();
+    }
+    else {
+        system("CLS");
+        runAdminCommands();
+    }
+}
+
+void adminAdd() {
+    string productCode, product;
+    float price = 0;
+
+    cout << "Please Enter Product Code, Product & Price: ";
+    cin >> productCode;
+    cin >> product;
+    cin >> price;
+
+    Admin.addProduct(productCode, product, price);
+
+    cout << "\tProduct Added" << endl;
+    Admin.searchOne(productCode);
+
     cout << "\nPress Enter to Continue: ";
     cin.ignore();
+    cin.ignore();
     system("CLS");
-    runAdminCommands(query);
+}
+
+void adminUpdate() {
+    string productCode;
+    string product;
+    float price;
+
+    cout << "Please enter the Product_Code: ";
+    cin >> productCode;
+
+    Admin.searchOne(productCode);
+    cout << "\nPlease enter the new Product & Price: ";
+    cin >> product >> price;
+
+    Admin.updateProduct(productCode, product, price);
+    Admin.searchOne(productCode);
+
+    cout << "\nPress Enter to Continue: ";
+    cin.ignore();
+    cin.ignore();
+    system("CLS");
+}
+
+void adminShow() {
+    cout << "\t Inventory List" << endl;
+    Admin.showProducts();
+
+    cout << "\nPress Enter to Continue: ";
+    cin.ignore();
+    cin.ignore();
+    system("CLS");
+}
+
+void adminDelete() {
+    string productCode;
+    cout << "\tPlease enter the Product_Code: ";
+    cin >> productCode;
+
+    Admin.deleteProduct(productCode);
+    cout << "\nPress Enter to Continue: ";
+    cin.ignore();
+    cin.ignore();
+    system("CLS");
+}
+
+void adminSearch() {
+    string productCode;
+
+    cout << "Please enter the Product_Code ";
+    cin >> productCode;
+
+    Admin.searchOne(productCode);
+
+    cout << "\nPress Enter to Continue: ";
+    cin.ignore();
+    cin.ignore();
+    system("CLS");
+}
+
+void billAdd() {
+    string productCode;
+
+    cout << "Please Enter Product Code: " << endl;
+    cin >> productCode;
+
+    Bill.billAddProduct(productCode);
+}
+
+void billDelete() {
+    string productCode;
+
+    cout << "Please Enter Product Code: " << endl;
+    cin >> productCode;
+
+    Bill.billDeleteProduct(productCode);
+}
+
+void billSearch() {
+    string productCode;
+
+    cout << "Please enter the Product_Code ";
+    cin >> productCode;
+
+    Admin.searchOne(productCode);
 }
