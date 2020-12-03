@@ -19,15 +19,20 @@ void InvAdmin::addProduct(string productCode, string product, float price) {
 */
 void InvAdmin::deleteProduct(string productCode) {
     int index = findIndex(productCode);
+    
+    if (index == -1) {
+        cout << "Product not in inventory" << endl;
+    } else {
+        for (int i = index; i < productCount - 1; i++) {
+            productCodes[i] = productCodes[i + 1];
+            productList[i] = productList[i + 1];
+            priceList[i] = priceList[i + 1];
+        }
 
-    for (int i = index; i < productCount - 1; i++) {
-        productCodes[i] = productCodes[i + 1];
-        productList[i] = productList[i + 1];
-        priceList[i] = priceList[i + 1];
+        productCount--;
+        cout << "\tProduct " << productCode << " deleted!" << endl;
     }
-
-    productCount--;
-    cout << "\tProduct " << productCode << " deleted!" << endl;
+    
 }
 
 /**
@@ -37,7 +42,7 @@ void InvAdmin::deleteProduct(string productCode) {
 * price users New/Old product price
 */
 void InvAdmin::updateProduct(string productCode, string product, float price) {
-    int index = 0;
+    int index = -1;
 
     for (int i = 0; i < productCount; i++) {
         if (productCodes[i] == productCode) {
@@ -45,9 +50,12 @@ void InvAdmin::updateProduct(string productCode, string product, float price) {
             break;
         }
     }
-
-    productList[index] = product;
-    priceList[index] = price;
+    if (index == -1) {
+        cout << "Not int product list" << endl;
+    } else {
+        productList[index] = product;
+        priceList[index] = price;
+    }
 }
 
 //
@@ -67,7 +75,7 @@ void InvAdmin::Bill()
 * returns: int Index
 */
 int InvAdmin::findBillIndex(string productCode) {
-    int index = 0;
+    int index = -1;
 
     for (int i = 0; i < billProdCount; i++) {
         if (selectedProducts[i] == productCode) {
@@ -86,14 +94,18 @@ int InvAdmin::findBillIndex(string productCode) {
 void InvAdmin::billAddProduct(string productCode) {
     int index = findIndex(productCode);
 
-    selectedProducts[billProdCount] = productList[index];
-    selectedProdCodes[billProdCount] = productCodes[index];
-    billPriceList[billProdCount] = priceList[index];
-    billAmount += priceList[index];
-    billProdCount++;
+    if (index == -1) {
+        cout << "Product not in inventory" << endl;
+    } else {
+        selectedProducts[billProdCount] = productList[index];
+        selectedProdCodes[billProdCount] = productCodes[index];
+        billPriceList[billProdCount] = priceList[index];
+        billAmount += priceList[index];
+        billProdCount++;
 
-    cout << "\tProduct added!" << endl;
-    cout << "\tItem: " << billProdCount << "\tAmount: " << billAmount << endl;
+        cout << "\tProduct added!" << endl;
+        cout << "\tItem: " << billProdCount << "\tAmount: " << billAmount << endl;
+    }
 }
 
 /**

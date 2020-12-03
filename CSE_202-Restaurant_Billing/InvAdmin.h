@@ -2,9 +2,9 @@
 #include "Inventory.h"
 class InvAdmin : public Inventory {
 private:
-    string selectedProducts[5];
-    string selectedProdCodes[5];
-    float billPriceList[5];
+    string selectedProducts[100];
+    string selectedProdCodes[100];
+    float billPriceList[100];
     float billAmount;
     int billProdCount;
 
