@@ -113,8 +113,7 @@ void runAdminCommands() {
     }
     else {
         system("CLS");
-        cout << "See you again!\n"
-            << endl;
+        cout << "See you again!" << endl;
     }
 }
 
