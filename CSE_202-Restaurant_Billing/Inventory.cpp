@@ -1,4 +1,6 @@
 #include "Inventory.h"
+#include <iomanip>
+#include <string.h>
 
 /**
 * Get index of product
@@ -29,7 +31,7 @@ void Inventory::showProducts() {
 
     for (int i = 0; i < productCount; i++) {
         cout << "\t\t" << productCodes[i] << "\t";
-        cout << productList[i] << "\t";
+        cout << productList[i] << setw(18-productList[i].length());
         cout << priceList[i] << endl;
     }
 }
@@ -42,14 +44,14 @@ void Inventory::searchOne(string productCode) {
         cout << "Product not in inventory" << endl;
     } else {
         cout << "\t\t"
-        << "Code\t"
-        << "Product\t\t"
-        << "Price" << endl;
+            << "Code\t"
+            << "Product\t\t"
+            << "Price" << endl;
         cout << "\t\t"
-        << "------|---------------|------" << endl;
+            << "------|---------------|------" << endl;
 
         cout << "\t\t" << productCodes[index] << "\t";
-        cout << productList[index] << "\t";
+        cout << productList[index] << setw(18 - productList[index].length());
         cout << priceList[index] << endl;
     }
 }

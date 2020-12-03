@@ -189,6 +189,7 @@ void adminUpdate() {
     cin >> product >> price;
 
     Admin.updateProduct(productCode, product, price);
+    cout << "\n\tUpdated Product\n";
     Admin.searchOne(productCode);
 
     cout << "\nPress Enter to Continue: ";
