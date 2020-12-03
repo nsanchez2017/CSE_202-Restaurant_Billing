@@ -85,80 +85,18 @@ void runAdminCommands() {
     if (query != "exit") {
         if (query == "show") {
             adminShow();
-            /*cout << "\t Inventory List" << endl;
-            Admin.showProducts();
-
-            cout << "\nPress Enter to Continue: ";
-            cin.ignore();
-            cin.ignore();
-            system("CLS");*/
         }
         else if (query == "add") {
             adminAdd();
-            /*string productCode, product;
-            float price = 0;
-
-            cout << "Please Enter Product Code, Product & Price: ";
-            cin >> productCode;
-            cin >> product;
-            cin >> price;
-
-            Admin.addProduct(productCode, product, price);
-
-            cout << "\tProduct Added" << endl;
-            Admin.searchOne(productCode);
-
-            cout << "\nPress Enter to Continue: ";
-            cin.ignore();
-            cin.ignore();
-            system("CLS");*/
         }
         else if (query == "delete") {
             adminDelete();
-            /*string productCode;
-            cout << "\tPlease enter the Product_Code: ";
-            cin >> productCode;
-
-            Admin.deleteProduct(productCode);
-            cout << "\nPress Enter to Continue: ";
-            cin.ignore();
-            cin.ignore();
-            system("CLS");*/
         }
         else if (query == "update") {
             adminUpdate();
-            /*string productCode;
-            string product;
-            float price;
-
-            cout << "Please enter the Product_Code: ";
-            cin >> productCode;
-
-            Admin.searchOne(productCode);
-            cout << "\nPlease enter the new Product & Price: ";
-            cin >> product >> price;
-
-            Admin.updateProduct(productCode, product, price);
-            Admin.searchOne(productCode);
-
-            cout << "\nPress Enter to Continue: ";
-            cin.ignore();
-            cin.ignore();
-            system("CLS");*/
         }
         else if (query == "search") {
             adminSearch();
-            /*string productCode;
-
-            cout << "Please enter the Product_Code ";
-            cin >> productCode;
-
-            Admin.searchOne(productCode);
-
-            cout << "\nPress Enter to Continue: ";
-            cin.ignore();
-            cin.ignore();
-            system("CLS");*/
         }
         // Billing System
         else if (query == "bill") {
@@ -196,30 +134,12 @@ void runBillCommands() {
         }
         else if (query == "search") {
             billSearch();
-            /*string productCode;
-
-            cout << "Please enter the Product_Code ";
-            cin >> productCode;
-
-            Admin.searchOne(productCode);*/
         }
         else if (query == "add") {
             billAdd();
-            /*string productCode;
-
-            cout << "Please Enter Product Code: " << endl;
-            cin >> productCode;
-
-            Bill.billAddProduct(productCode);*/
         }
         else if (query == "delete") {
             billDelete();
-            /*string productCode;
-
-            cout << "Please Enter Product Code: " << endl;
-            cin >> productCode;
-
-            Bill.billDeleteProduct(productCode);*/
         }
         else if (query == "generate") {
             Bill.generateBill();
